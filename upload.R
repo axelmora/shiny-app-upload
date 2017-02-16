@@ -22,7 +22,8 @@ server <- function(input, output) {
     dt <- read.csv(inFile$datapath, header=input$header, sep=input$sep, 
                       quote=input$quote)
     
-    cols <- (1:ncol(dt))
+
+    cols <- (colnames(dt))
     
     tabPanel("Columnas",
     selectInput("cols1", "X", cols),
@@ -40,9 +41,15 @@ server <- function(input, output) {
     dt <- read.csv(inFile$datapath, header=input$header, sep=input$sep, 
                       quote=input$quote)
     datos <- dt
-    x <- dt[,(as.numeric(input$cols1))]
-    y <- dt[,(as.numeric(input$cols2))]
-    cl <- dt[,(as.numeric(input$cols3))]
+    cols <- (colnames(datos))
+    
+    x1 <- which(cols == input$cols1)
+    y1 <- which(cols == input$cols2)
+    cl1 <- which(cols == input$cols3)
+    
+    x <- datos[,x1]
+    y <- datos[,y1]
+    cl <- datos[,cl1]
     
     print(cl)
     
